@@ -111,7 +111,16 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB connection error:", err));
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "https://bilvine-empire-frnt.onrender.com"],
+  credentials: true,
+}));
+app.get("/", (req, res) => {
+  res.send("Backend API is live!");
+});
+
+
 app.use(bodyParser.json());
 
 app.use("/api/users", userRoutes);

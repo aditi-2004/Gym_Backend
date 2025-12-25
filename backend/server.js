@@ -113,9 +113,18 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 // app.use(cors());
 
+// app.use(cors({
+//   origin: 'https://bilvine-empire-frnt.onrender.com', // or '*'
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: 'https://bilvine-empire-frnt.onrender.com', // or '*'
-  credentials: true
+  origin: [
+    "http://localhost:3000",
+    "https://bilvine-empire-frnt.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 app.use(bodyParser.json());
